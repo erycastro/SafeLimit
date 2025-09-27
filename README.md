@@ -1,8 +1,24 @@
 # SafeLimit — aumento de limite responsável via depósitos + PD
 
+[![Python](https://img.shields.io/badge/Python-3.11-3776AB)]()
+[![Streamlit](https://img.shields.io/badge/Streamlit-app-FF4B4B)]()
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-logistic%20%2B%20calibration-F7931E)]()
+
 **O que é:** O SafeLimit recomenda **aumento de limite de cartão** para clientes que **poupam de forma recorrente**, controlando **risco** com um **modelo de PD** (probabilidade de default) e **regras de política** com travas (“caps”). É um projeto didático com dados **sintéticos**.
 
 ---
+### Como rodar
+
+```bash
+# 1) instalar dependências (no seu ambiente ativado)
+pip install -r requirements.txt
+
+# 2) (opcional) treinar e salvar o modelo calibrado via notebook
+#    -> notebooks/02_modelo_pd.ipynb  (salva em models/safelimit_pd_calibrated_sigmoid.joblib)
+
+# 3) iniciar o app (raiz do projeto)
+streamlit run app/app.py
+```
 
 ## Como funciona (em 2 passos)
 
@@ -132,20 +148,6 @@ Renda = R$ 3.000 | Limite atual = R$ 1.200 | Ticket = R$ 300 | Consistência = 6
     ├─ env/
     └─ README.md
 
-
----
-
-## Quickstart
-
-**Ambiente — libs essenciais (nomes simples para adicionar no env):**  
-`python` (3.11), `pandas`, `numpy`, `scikit-learn`, `matplotlib`, `jupyterlab`, `ipykernel`, `streamlit`  
-
-**Como rodar (comandos num bloco único):**
-    # EDA/modelagem
-    jupyter lab
-
-    # App (placeholder de PD até plugar o modelo)
-    streamlit run app/app.py
 
 ---
 
