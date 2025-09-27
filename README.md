@@ -113,17 +113,25 @@ Renda = R$ 3.000 | Limite atual = R$ 1.200 | Ticket = R$ 300 | Consistência = 6
 
 ## Estrutura do repositório
     .
+    ├─ .streamlit/
+    │  └─ config.toml
+    ├─ app/
+    │  ├─ app.py
+    │  └─ pages/
+    │     └─ 01_dashboard.py
     ├─ data/
     │  └─ base_sintetica.csv
+    ├─ models/
+    │  └─ safelimit_pd_calibrated_sigmoid.joblib
     ├─ notebooks/
     │  ├─ 01_eda.ipynb
     │  └─ 02_modelo_pd.ipynb
-    ├─ app/
-    │  └─ app.py
     ├─ reports/
     │  ├─ metrics.md
     │  └─ policy_tradeoffs.md
+    ├─ env/
     └─ README.md
+
 
 ---
 
