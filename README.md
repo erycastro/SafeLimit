@@ -98,6 +98,19 @@ Renda = R$ 3.000 | Limite atual = R$ 1.200 | Ticket = R$ 300 | Consistência = 6
 
 ---
 
+## App & Dashboard
+
+- **App (simulação 1 cliente / CSV):** `streamlit run app/app.py`  
+  - Entrada: renda, limite atual, ticket, utilização, consistência (0–6), atraso 30d.  
+  - Saída: **PD, bucket, elegível, novo limite**, **justificativa** e download do CSV.  
+
+- **Dashboard (monitoramento/“what-if”):** aparece como **Pages → Dashboard** no app.  
+  - **KPIs**: % elegíveis, aumento médio; **guardrail** de risco (ΔEL ≤ **10%**).  
+  - **Gráficos acessíveis**: distribuição por bucket e elegibilidade por bucket com rótulos numéricos.  
+  - **Parâmetros ajustáveis**: α, corte do bucket D (PD), caps por renda e multiplicador.
+
+  ---
+
 ## Estrutura do repositório
     .
     ├─ data/
