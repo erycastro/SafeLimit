@@ -25,10 +25,13 @@ def bucket(pd_):
     if pd_ < 0.10: return 'C'
     return 'D'
 
+def _passa_min_cons(cons_frac, minimo_meses=4):
+    return int(round(cons_frac * 6)) >= minimo_meses
+
 def recomendar_limite(row, alpha=5.0):
     b = row['bucket']
-    cons_ok = row['consistencia_6m'] >= 2/3
-    tick_ok = row['ticket_medio_deposito'] >= 0.05*row['renda_mensal']
+    cons_ok = _passa_min_cons(row['consistencia_6m'], minimo_meses=4)
+    tick_ok = row['ticket_medio_deposito'] >= 0.05 * row['renda_mensal']
     eleg_min = cons_ok and tick_ok
     if (not eleg_min) or b == 'D':
         just = []
@@ -65,7 +68,8 @@ with tab1:
         ticket = st.number_input("Ticket médio de depósito (R$)", min_value=0.0, value=300.0, step=10.0)
     with col2:
         utilizacao = st.slider("Utilização do limite (0–1)", 0.0, 1.0, 0.35, 0.01)
-        consist = st.slider("Consistência (fração 6m)", 0.0, 1.0, 0.67, 1/6)
+        cons_meses = st.slider("Consistência (meses com depósito nos últimos 6)", 0, 6, 4, 1)
+        consist = cons_meses / 6
         atraso30d = st.selectbox("Atraso ≥30d recente?", ["Não", "Sim"]) == "Sim"
     alpha = st.slider("α (agressividade do aumento)", 1.0, 8.0, 5.0, 0.5)
 
