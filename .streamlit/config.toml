@@ -1,2 +1,5 @@
 [theme]
-primaryColor="#00C2FF"
+primaryColor="#00C2FF"          # azul Neon (detalhes, botões, slider)
+backgroundColor="#F7FBFF"       # fundo da página (azul bem clarinho)
+secondaryBackgroundColor="#EAF6FF"  # cartões/sidebars/tabs
+textColor="#0B1F2A"             # texto quase preto
