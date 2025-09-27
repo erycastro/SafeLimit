@@ -4,7 +4,7 @@ import numpy as np
 from pathlib import Path
 import matplotlib.pyplot as plt
 
-st.set_page_config(page_title="SafeLimit — Dashboard", page_icon="📊", layout="wide")
+st.set_page_config(page_title="Dashboard", page_icon="📊", layout="wide")
 
 # --- Carregar dados (funciona só com base_sintetica.csv) ---
 from pathlib import Path
@@ -83,7 +83,7 @@ calc = df.apply(recomendar_limite_row, axis=1, result_type='expand')
 df['novo_limite_viz'], df['aumento_viz'], df['elegivel_viz'], df['bucket_viz'] = calc[0], calc[1], calc[2], calc[3]
 
 # --- Cabeçalho explicativo (acessível) ---
-st.markdown("## 📊 Dashboard — SafeLimit")
+st.markdown("## Dashboard")
 st.write(
     "O painel abaixo resume a política atual. **Leitura acessível**: "
     "os gráficos têm rótulos de valor e todo indicador possui texto. "
@@ -116,7 +116,7 @@ else:
 
 # --- Distribuição por bucket (com rótulos) ---
 st.markdown("### Distribuição por bucket")
-st.write("O gráfico abaixo mostra a fração do portfólio em cada bucket (texto no topo da barra evita depender de cor).")
+st.write("O gráfico abaixo mostra a fração do portfólio em cada bucket.")
 bucket_share = (df['bucket_viz'].value_counts(normalize=True).sort_index()*100).reindex(['A','B','C','D']).fillna(0)
 
 fig, ax = plt.subplots(figsize=(6,3))
@@ -149,7 +149,7 @@ ax2.grid(axis='y', alpha=0.2)
 st.pyplot(fig2, use_container_width=True)
 
 # --- Tabela acessível + download ---
-st.markdown("### Tabela (acessível)")
+st.markdown("### Tabela")
 st.write("Tabela com PD, bucket e recomendação; você pode **ordenar/filtrar** e **baixar CSV**.")
 view_cols = ['cliente_id','pd_pred','bucket_viz','elegivel_viz','limite_atual','novo_limite_viz','aumento_viz']
 df_view = df[view_cols].copy()

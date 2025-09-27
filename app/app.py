@@ -5,14 +5,8 @@ from joblib import load
 import os
 
 st.set_page_config(page_title="SafeLimit", page_icon="💳", layout="centered")
-st.title("SafeLimit — aumento de limite responsável ")
-st.caption("PD (modelo calibrado) + política por buckets, elegibilidade e caps")
-st.markdown("""
-<style>
-[data-testid="stMetricDelta"] { color: #00C2FF !important; }
-[data-testid="stMetricDelta"] svg path { fill: #00C2FF !important; }
-</style>
-""", unsafe_allow_html=True)
+st.title("SafeLimit")
+st.subheader("Aumento de limite responsável")
 
 # ------------- carregar modelo -------------
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "models", "safelimit_pd_calibrated_sigmoid.joblib")
