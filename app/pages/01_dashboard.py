@@ -91,18 +91,28 @@ st.write(
 )
 
 # --- KPIs principais (linha 1) ---
-c1, c2, c3, c4 = st.columns(4)
+# --- KPIs principais (linha 1) ---
+c1, c2 = st.columns(2)
+
 pct_eleg = df['elegivel_viz'].mean()
 aum_med  = df.loc[df['elegivel_viz'], 'aumento_viz'].mean()
-ead_pre  = df['limite_atual']
-ead_pos  = df['novo_limite_viz']
-el_pre   = (df['pd_pred'] * ead_pre).mean()
-el_pos   = (df['pd_pred'] * ead_pos).mean()
 
 c1.metric("Elegíveis", f"{pct_eleg*100:.1f}%", help="Proporção de clientes com aumento sugerido.")
 c2.metric("Aumento médio (elegíveis)", f"R$ {aum_med:,.2f}")
-c3.metric("EL médio (antes)", f"R$ {el_pre:,.2f}")
-c4.metric("EL médio (depois)", f"R$ {el_pos:,.2f}", delta=f"{(el_pos-el_pre):,.2f}")
+
+# --- Guardrail de risco (não mostrar EL, só o selo) ---
+LGD = 1.0  # proxy simples; pode trocar p/ 0.8 se quiser
+el_pre = (df['pd_pred'] * LGD * df['limite_atual']).mean()
+el_pos = (df['pd_pred'] * LGD * df['novo_limite_viz']).mean()
+delta_pct = 100 * (el_pos - el_pre) / max(el_pre, 1e-9)
+
+limite = 10.0  # limite de ΔEL aceitável (em %)
+if delta_pct <= limite:
+    st.info(f"Risco controlado: ΔEL ≈ {delta_pct:.1f}% (≤ {limite:.0f}%).")
+else:
+    st.warning(f"Atenção: ΔEL ≈ {delta_pct:.1f}% (> {limite:.0f}%). "
+               "Ajuste α/corte de PD ou caps para reduzir.")
+
 
 # --- Distribuição por bucket (com rótulos) ---
 st.markdown("### Distribuição por bucket")
