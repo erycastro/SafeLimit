@@ -84,11 +84,17 @@ Renda = R$ 3.000 | Limite atual = R$ 1.200 | Ticket = R$ 300 | Consistência = 6
 
 ---
 
-## Resultados (preencher após treinar)
-- **AUC:** _TODO_
-- **Calibração:** _TODO_ (gráfico PD prevista vs observada por bins)
-- **Cortes finais adotados:** _TODO_ (ex.: PD < 6%; consistência ≥ 4/6)
-- **Impacto simulado (portfólio):** _TODO_ (% elegíveis, aumento médio, ΔEAD, ΔEL estimada)
+
+## Resultados
+
+- **Modelo (baseline):** AUC **0,747** no conjunto de teste.
+- **Calibração:** comparação por quantis (**q = 8**) com **erro médio ≈ 2,3 p.p.** (PD prevista ≈ observada).
+- **Cortes finais da política:** PD < **6%**, consistência ≥ **4/6**, ticket ≥ **5%** da renda; caps **50% da renda** e **2×** o limite; fatores A/B/C = **1.0 / 0.6 / 0.3**; **D = 0%** elegível.
+- **Impacto (sintético):**
+  - **41,5%** elegíveis  
+  - **Aumento médio** (entre elegíveis): **R$ 609,31**
+  - **Buckets** no portfólio: **A 15,6% / B 33,7% / C 24,4% / D 26,3%**
+  - **Elegibilidade por bucket:** **A 96% / B 62% / C 22,9% / D 0%**
 
 ---
 
@@ -112,7 +118,6 @@ Renda = R$ 3.000 | Limite atual = R$ 1.200 | Ticket = R$ 300 | Consistência = 6
 
 **Ambiente — libs essenciais (nomes simples para adicionar no env):**  
 `python` (3.11), `pandas`, `numpy`, `scikit-learn`, `matplotlib`, `jupyterlab`, `ipykernel`, `streamlit`  
-**Opcionais:** `pyarrow` (parquet), `plotly` (interativos), `tqdm` (progresso)
 
 **Como rodar (comandos num bloco único):**
     # EDA/modelagem
