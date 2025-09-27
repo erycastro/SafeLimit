@@ -3,7 +3,7 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-app-FF4B4B)]()
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-logistic%20%2B%20calibration-F7931E)]()
 
-**O que é:** O SafeLimit recomenda **aumento de limite de cartão** para clientes que **poupam de forma recorrente**, controlando **risco** com um **modelo de PD** (probabilidade de default) e **regras de política** com travas (“caps”). É um projeto didático com dados **sintéticos**.
+O SafeLimit recomenda aumento de limite de cartão para clientes que poupam de forma recorrente, controlando risco com um modelo de PD (probabilidade de default) e regras de política com travas (“caps”). É um projeto didático com dados **sintéticos**.
 
 <img src="./assets/safelimit-interface.png" alt="Interface do aplicativo com simulação para 1 cliente" width="420">
 
