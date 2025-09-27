@@ -59,6 +59,7 @@ FEATURES = ['utilizacao','consistencia_6m','ticket_medio_deposito','renda_mensal
 
 tab1, tab2 = st.tabs(["Simular 1 cliente", "Processar CSV"])
 
+
 with tab1:
     st.subheader("Entrada")
     col1, col2 = st.columns(2)
@@ -67,7 +68,16 @@ with tab1:
         limite = st.number_input("Limite atual (R$)", min_value=0.0, value=1200.0, step=50.0)
         ticket = st.number_input("Ticket médio de depósito (R$)", min_value=0.0, value=300.0, step=10.0)
     with col2:
-        utilizacao = st.slider("Utilização do limite (0–1)", 0.0, 1.0, 0.35, 0.01)
+        util_pct = st.slider("Utilização do limite (%)", 0, 100, 35, 1,
+                     help="Quanto do limite está usado agora. Ex.: 50% = metade do limite.")
+        utilizacao = util_pct / 100.0
+        def faixa_util(u):
+            if u < 0.30:  return "Baixa",   "#00C2FF"  # azul
+            if u < 0.80:  return "Moderada","#0077CC"
+            if u < 0.95:  return "Alta",    "#FFA500"  # laranja
+            return "Crítica", "#FF4B4B"
+        lbl, cor = faixa_util(utilizacao)
+        st.markdown(f"<span style='padding:4px 10px;border-radius:999px;background:{cor}20;color:{cor};font-weight:700;'>Utilização {lbl}</span>", unsafe_allow_html=True)
         cons_meses = st.slider("Consistência (meses com depósito nos últimos 6)", 0, 6, 4, 1)
         consist = cons_meses / 6
         atraso30d = st.selectbox("Atraso ≥30d recente?", ["Não", "Sim"]) == "Sim"
